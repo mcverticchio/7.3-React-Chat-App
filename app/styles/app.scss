@@ -23,6 +23,28 @@ img {
   width: 300px;
 }
 
+.loginScreen {
+  margin-top: 200px;
+}
+
 .btn-success {
   margin-left:10px;
+  background: #7979d2;
+  border: none;
+  width:100px;
+}
+.btn-success:hover {
+  background: #b3b3e6;
+}
+
+.usernameInput {
+  width: 200px;
+  padding: 5px;
+}
+
+
+.sendMsgButton {
+  width: 150px;
+  padding: 10px;
+  margin-top: 10px;
 }

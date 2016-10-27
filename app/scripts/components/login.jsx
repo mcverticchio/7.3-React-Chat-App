@@ -22,9 +22,9 @@ var LoginComponent = React.createClass({
   render: function(){
     return (
       <div className="row">
-        <div className="col-md-6 col-md-offset-4">
+        <div className="col-md-6 col-md-offset-4 loginScreen">
           <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleUsername} name="username" placeholder="Username" />
+            <input onChange={this.handleUsername} className="usernameInput" name="username" placeholder="Username" />
             <button type="submit" className="btn btn-success">Login!</button>
           </form>
         </div>

@@ -33,7 +33,7 @@ var ChatForm = React.createClass({
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="chatInput">Write a comment below!</label>
             <input onChange={this.handleChatInput} value={this.state.chatInput} name="chatInput" placeholder="" id="chatInput" />
-            <button type="submit" className="btn btn-success">Send Message</button>
+            <button type="submit" className="btn btn-success sendMsgButton">Send Message</button>
         </form>
         </div>
       </div>
