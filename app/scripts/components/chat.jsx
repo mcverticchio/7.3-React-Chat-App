@@ -1,32 +1,40 @@
+var $ = require('jquery');
 var React = require('react');
 var Backbone = require('backbone');
 require('backbone-react-component');
 
-var ChatCollection = require('../models.chat').ChatCollection;
+var ChatCollection = require('../models/chat').ChatCollection;
 
 var ChatForm = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   getInitialState: function(){
     return{
       chatInput: ''
     };
   },
   handleChatInput: function(e){
-    var input = e.target.value;
-    this.setState({title: title});
+    var chatInput = e.target.value;
+    this.setState({chatInput: chatInput});
   },
   handleSubmit: function(e){
     e.preventDefault();
-    this.getCollection().create({chatInput: this.states.chatInput});
+    // console.log(this.props);
+    this.getCollection().create({
+      content: this.state.chatInput,
+      username: this.props.username,
+      time: new Date().getTime()
+      });
     this.setState({chatInput: ''});
   },
   render: function(){
     return (
-      <div class="row">
-        <div class="col-md-6">
+      <div className="row">
+        <div className="col-md-6">
           <form onSubmit={this.handleSubmit}>
-            <label for="chatInput">Write a comment below!</label>
-            <input onChange={this.handleChatInput} name="chatInput" placeholder="" id="chatField" />
-          </form>
+            <label htmlFor="chatInput">Write a comment below!</label>
+            <input onChange={this.handleChatInput} value={this.state.chatInput} name="chatInput" placeholder="" id="chatInput" />
+            <button type="submit" className="btn btn-success">Send Message</button>
+        </form>
         </div>
       </div>
     )
@@ -34,11 +42,17 @@ var ChatForm = React.createClass({
 });
 
 var ChatListing= React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   render: function(){
     var collection = this.getCollection();
-    var listofChats = collection.map(function(chat){
-      return <li key={chat.get('_id') || chat.cid}>{chat.get('chatInput')}</li>;
-    });
+    var listOfChats = collection.map(function(chat){
+      return (
+        <li key={chat.get('_id') || chat.cid}>
+          {chat.get('username')}
+          {chat.get('content')}
+          {chat.get('time')}
+        </li>
+    )});
 
     return (
       <ul>
@@ -47,3 +61,20 @@ var ChatListing= React.createClass({
     );
   }
 });
+
+var ChatComponent= React.createClass({
+  mixins: [Backbone.React.Component.mixin],
+  render: function(){
+    return (
+      <div>
+      <h2> Hey {this.props.username}</h2>
+      <ChatForm username={this.props.username}/>
+      <ChatListing />
+      </div>
+    )
+  }
+});
+
+module.exports = {
+  ChatComponent: ChatComponent
+}
