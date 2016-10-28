@@ -64,6 +64,7 @@ var ChatListing= React.createClass({
 
 var ChatComponent= React.createClass({
   mixins: [Backbone.React.Component.mixin],
+
   render: function(){
     return (
       <div>
