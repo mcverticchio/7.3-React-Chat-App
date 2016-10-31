@@ -29,10 +29,9 @@ var ChatForm = React.createClass({
   render: function(){
     return (
       <div className="row">
-        <div className="col-md-6">
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="chatInput">Write a comment below!</label>
-            <input onChange={this.handleChatInput} value={this.state.chatInput} name="chatInput" placeholder="" id="chatInput" />
+        <div className="col-md-12">
+          <form onSubmit={this.handleSubmit} className="chatForm">
+            <textarea onChange={this.handleChatInput} type="text" value={this.state.chatInput} rows="5" name="chatInput" placeholder="Write a reply..." id="chatInput" />
             <button type="submit" className="btn btn-success sendMsgButton">Send Message</button>
         </form>
         </div>
@@ -47,17 +46,21 @@ var ChatListing= React.createClass({
     var collection = this.getCollection();
     var listOfChats = collection.map(function(chat){
       return (
-        <li key={chat.get('_id') || chat.cid}>
-          {chat.get('username')}
-          {chat.get('content')}
-          {chat.get('time')}
-        </li>
+        <div key={chat.get('_id') || chat.cid} className="well row">
+          <div className="col-md-12">
+            <span className="username">{chat.get('username')}</span>
+            <span className="time">{chat.get('time')}</span>
+          </div>
+          <div className="col-md-12">
+            <span className="content">{chat.get('content')}</span>
+          </div>
+        </div>
     )});
 
     return (
-      <ul>
-        {listOfChats}
-      </ul>
+        <div>
+          {listOfChats}
+        </div>
     );
   }
 });
@@ -67,10 +70,10 @@ var ChatComponent= React.createClass({
 
   render: function(){
     return (
-      <div>
-      <h2> Hey {this.props.username}</h2>
-      <ChatForm username={this.props.username}/>
+      <div className="container">
+      <h1 className="msgHeading">Current Messages:</h1>
       <ChatListing />
+      <ChatForm username={this.props.username}/>
       </div>
     )
   }

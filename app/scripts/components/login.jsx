@@ -21,14 +21,19 @@ var LoginComponent = React.createClass({
   },
   render: function(){
     return (
+      <div className="container">
+      <header>
+        <h1>Enter a username to begin chatting!</h1>
+      </header>
       <div className="row">
         <div className="col-md-6 col-md-offset-4 loginScreen">
           <form onSubmit={this.handleSubmit}>
             <input onChange={this.handleUsername} className="usernameInput" name="username" placeholder="Username" />
-            <button type="submit" className="btn btn-success">Login!</button>
+            <button type="submit" className="btn btn-success loginBtn">Login!</button>
           </form>
         </div>
       </div>
+    </div>
     )
   }
 });
